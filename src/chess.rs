@@ -207,5 +207,10 @@ impl Chess {
         }
         available_move
     }
+    fn queen_available_move(&self, color: Color, from: (u8, u8)) -> Vec((MoveType, u8, u8)) {
+        let mut available_move = self.tour_available_move;
+        available_move.extend(fou_available_move);
+        available_move
+    }
 }
 
