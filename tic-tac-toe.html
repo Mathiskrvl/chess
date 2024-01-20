@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #board {
+      display: grid;
+      background-color: burlywood;
+      grid-template-columns: repeat(3, 100px);
+      grid-row-gap: 5px;
+      grid-column-gap: 5px;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      font-size: 24px;
+      text-align: center;
+      line-height: 100px;
+      cursor: pointer;
+      border: 1px solid #000;
+    }
+  </style>
+  <title>Tic Tac Toe</title>
+</head>
+<body>
+
+<div id="board"></div>
+
+<script>
+  const board = document.getElementById('board');
+  const cells = Array.from({ length: 9 });
+
+  let currentPlayer = 'X';
+  let gameBoard = ['', '', '', '', '', '', '', '', ''];
+  let gameActive = true;
+
+  function renderBoard() {
+    board.innerHTML = '';
+    gameBoard.forEach((value, index) => {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      cell.textContent = value;
+      cell.addEventListener('click', () => cellClick(index));
+      board.appendChild(cell);
+      cells[index] = cell;
+    });
+  }
+
+  function cellClick(index) {
+    if (!gameActive || gameBoard[index] !== '') return;
+
+    gameBoard[index] = currentPlayer;
+    cells[index].textContent = currentPlayer;
+
+    if (checkWinner()) {
+      alert(`Player ${currentPlayer} wins!`);
+      resetGame();
+    } else if (gameBoard.every(cell => cell !== '')) {
+      alert('It\'s a draw!');
+      resetGame();
+    } else {
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    }
+  }
+
+  function checkWinner() {
+    const winPatterns = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+      [0, 4, 8], [2, 4, 6] // diagonals
+    ];
+
+    return winPatterns.some(pattern =>
+      pattern.every(index => gameBoard[index] === currentPlayer)
+    );
+  }
+
+  function resetGame() {
+    gameBoard = ['', '', '', '', '', '', '', '', ''];
+    currentPlayer = 'X';
+    gameActive = true;
+    renderBoard();
+  }
+
+  renderBoard();
+</script>
+
+</body>
+</html>
