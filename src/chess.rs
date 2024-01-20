@@ -45,25 +45,6 @@ impl Chess {
             // pit: Vec::new()
         }
     }
-    fn get_color(&self, from: (usize, usize)) -> Option<Color> {
-        if let Some(piece) = self.board[from.0][from.1] {
-            if piece != Piece::TemporaryPion(Color::Black) && piece != Piece::TemporaryPion(Color::White) {
-                return Some(self.color_piece(piece));
-            }
-        }
-        None
-        // match self.board[from.0][from.1] {
-        //     Some(Piece::King(color, _)) => Some(color),
-        //     Some(Piece::Queen(color)) => Some(color),
-        //     Some(Piece::Cavalier(color)) => Some(color),
-        //     Some(Piece::Fou(color)) => Some(color),
-        //     Some(Piece::Tour(color)) => Some(color),
-        //     Some(Piece::Pion(color)) => Some(color),
-        //     Some(Piece::TemporaryPion(_)) => None,
-        //     None => None
-        // }
-    }
-
     fn color_piece(&self, piece: Piece) -> Color {
         match piece {
             Piece::King(color, _) => color,
@@ -75,13 +56,45 @@ impl Chess {
             Piece::TemporaryPion(color) => color,
         }
     }
+    fn get_color(&self, from: (usize, usize)) -> Option<Color> {
+        if let Some(piece) = self.board[from.0][from.1] {
+            if piece != Piece::TemporaryPion(Color::Black) && piece != Piece::TemporaryPion(Color::White) {
+                return Some(self.color_piece(piece));
+            }
+        }
+        None
+    }
     // action en fonction des MoveType
+    fn action(&mut self, movetype: MoveType, from: (usize, usize), to: (usize, usize)) {
+        match movetype {
+            MoveType::Normal => self.normal_move(from, to),
+            MoveType::DoublePush => self.double_move(from, to),
+            MoveType::Roque => self.roque_move(from, to),
+            MoveType::Promotion => self.promotion_move(from, to),
+            MoveType::EnPassant => self.passant_move(from, to)
+        }
+    }
+    fn normal_move(&mut self, from: (usize, usize), to: (usize, usize)) {
+        // if let Some(dead) = self.board[to.0][to.1] {
+        //     self.pit.push(dead);
+        // }
+        self.board[to.0][to.1] = self.board[from.0][from.1];
+        self.board[from.0][from.1] = None;
+    }
+    fn double_move(&mut self, from: (usize, usize), to: (usize, usize)) {
+        todo!()
+    }
+    fn roque_move(&mut self, from: (usize, usize), to: (usize, usize)) {
+        todo!()
+    }
+    fn promotion_move(&mut self, from: (usize, usize), to: (usize, usize)) {
+        todo!()
+    }
+    fn passant_move(&mut self, from: (usize, usize), to: (usize, usize)) {
+        todo!()
+    }
     // fn action(&mut self, from: (usize, usize), to: (usize, usize)) {
-    //     // if let Some(dead) = self.board[to.0][to.1] {
-    //     //     self.pit.push(dead);
-    //     // }
-    //     self.board[to.0][to.1] = self.board[from.0][from.1];
-    //     self.board[from.0][from.1] = None;
+
     // }
 
     fn available_move(&self, from: (usize, usize)) -> Vec<(MoveType, usize, usize)> {
@@ -146,7 +159,6 @@ impl Chess {
         }
         available_move
     }
-
     fn tour_available_move(&self, color: Color, from: (usize, usize)) -> Vec<(MoveType, usize, usize)> {
         let mut available_move = Vec::new();
         // haut
@@ -291,9 +303,13 @@ impl Chess {
         // pion noir
         if color == Color::Black {
             if self.get_color((from.0 + 1, from.1)) == None {
-                available_move.push((MoveType::Normal, from.0 + 1, from.1));
+                if from.0 + 1 != 0 {
+                    available_move.push((MoveType::Normal, from.0 + 1, from.1));
+                } else {
+                    available_move.push((MoveType::Promotion, from.0 + 1, from.1));
+                }
             }
-            if self.get_color((from.0 + 2, from.1)) == None {
+            if from.0 == 6 && self.get_color((from.0 + 2, from.1)) == None {
                 available_move.push((MoveType::DoublePush, from.0 + 2, from.1));
             }
             if let Some(piece) = self.board[from.0 + 1][from.1 - 1] {
@@ -316,9 +332,13 @@ impl Chess {
         // pion blanc
         if color == Color::White {
             if self.get_color((from.0 - 1, from.1)) == None {
-                available_move.push((MoveType::Normal, from.0 - 1, from.1))
+                if from.0 - 1 != 7 {
+                    available_move.push((MoveType::Normal, from.0 - 1, from.1));
+                } else {
+                    available_move.push((MoveType::Promotion, from.0 - 1, from.1));
+                }
             }
-            if self.get_color((from.0 - 2, from.1)) == None {
+            if from.0 == 1 && self.get_color((from.0 - 2, from.1)) == None {
                 available_move.push((MoveType::DoublePush, from.0 - 2, from.1));
             }
             if let Some(piece) = self.board[from.0 - 1][from.1 - 1] {
