@@ -2,24 +2,25 @@
 enum Color {
     White,
     Black,
-    None
+    // None
 }
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, PartialEq)]
 enum Piece {
     King(Color, bool),
     Queen(Color),
     Cavalier(Color),
     Fou(Color),
     Tour(Color),
-    Pion(Color)
+    Pion(Color),
+    TemporaryPion(Color),
 }
 
 enum MoveType {
     Normal,
     DoublePush,
     EnPassant,
-    Rook,
+    Roque,
     Promotion,
 }
 
@@ -45,23 +46,43 @@ impl Chess {
         }
     }
     fn get_color(&self, from: (usize, usize)) -> Option<Color> {
-        match self.board[from.0][from.1] {
-            Some(Piece::King(color, _)) => Some(color),
-            Some(Piece::Queen(color)) => Some(color),
-            Some(Piece::Cavalier(color)) => Some(color),
-            Some(Piece::Fou(color)) => Some(color),
-            Some(Piece::Tour(color)) => Some(color),
-            Some(Piece::Pion(color)) => Some(color),
-            None => None
+        if let Some(piece) = self.board[from.0][from.1] {
+            if piece != Piece::TemporaryPion(Color::Black) && piece != Piece::TemporaryPion(Color::White) {
+                return Some(self.color_piece(piece));
+            }
+        }
+        None
+        // match self.board[from.0][from.1] {
+        //     Some(Piece::King(color, _)) => Some(color),
+        //     Some(Piece::Queen(color)) => Some(color),
+        //     Some(Piece::Cavalier(color)) => Some(color),
+        //     Some(Piece::Fou(color)) => Some(color),
+        //     Some(Piece::Tour(color)) => Some(color),
+        //     Some(Piece::Pion(color)) => Some(color),
+        //     Some(Piece::TemporaryPion(_)) => None,
+        //     None => None
+        // }
+    }
+
+    fn color_piece(&self, piece: Piece) -> Color {
+        match piece {
+            Piece::King(color, _) => color,
+            Piece::Queen(color) => color,
+            Piece::Cavalier(color) => color,
+            Piece::Fou(color) => color,
+            Piece::Tour(color) => color,
+            Piece::Pion(color) => color,
+            Piece::TemporaryPion(color) => color,
         }
     }
-    fn action(&mut self, from: (usize, usize), to: (usize, usize)) {
-        // if let Some(dead) = self.board[to.0][to.1] {
-        //     self.pit.push(dead);
-        // }
-        self.board[to.0][to.1] = self.board[from.0][from.1];
-        self.board[from.0][from.1] = None;
-    }
+    // action en fonction des MoveType
+    // fn action(&mut self, from: (usize, usize), to: (usize, usize)) {
+    //     // if let Some(dead) = self.board[to.0][to.1] {
+    //     //     self.pit.push(dead);
+    //     // }
+    //     self.board[to.0][to.1] = self.board[from.0][from.1];
+    //     self.board[from.0][from.1] = None;
+    // }
 
     fn available_move(&self, from: (usize, usize)) -> Vec<(MoveType, usize, usize)> {
         match self.board[from.0][from.1] {
@@ -71,13 +92,14 @@ impl Chess {
             Some(Piece::King(color, first_move)) => self.king_available_move(color, first_move, from),
             Some(Piece::Queen(color)) => self.queen_available_move(color, from),
             Some(Piece::Pion(color)) => self.pion_available_move(color, from),
-            None => todo!()
+            Some(Piece::TemporaryPion(_)) => Vec::new(),
+            None => Vec::new()
         }
     }
     fn cavalier_available_move(&self, color: Color, from: (usize, usize)) -> Vec<(MoveType, usize, usize)> {
         let mut available_move = Vec::new();
         //let (x, y) = (from.0 as i8, from.1 as i8);
-        for &direction in [(2i8,1i8), (1i8,2i8), (2i8,-1i8), (1i8,-2i8), (-1i8,-2i8), (-2i8,-1i8), (-1i8, 2i8), (-2i8, 1i8)].iter() {
+        for direction in [(2i8,1i8), (1i8,2i8), (2i8,-1i8), (1i8,-2i8), (-1i8,-2i8), (-2i8,-1i8), (-1i8, 2i8), (-2i8, 1i8)].into_iter() {
             let (x, y) = (from.0 as i8 + direction.0, from.1 as i8 + direction.1);
             if x >= 0 && x <= 7 && y >= 0 && y <= 7 {
                 if let Some(piece_color) = self.get_color((x as usize, y as usize)) {
@@ -109,7 +131,18 @@ impl Chess {
             }
         } 
         if first_move {
-            // todo rook moves
+            // Roque à gauche
+            if let Some(color_tour) = self.get_color((from.0, from.1 - 4)) {
+                if color == color_tour && self.get_color((from.0, from.1 - 1)) == None && self.get_color((from.0, from.1 - 2)) == None && self.get_color((from.0, from.1 - 3)) == None {
+                    available_move.push((MoveType::Roque, from.0, from.1 - 4));
+                }
+            }
+            // Roque à droite
+            if let Some(color_tour) = self.get_color((from.0, from.1 + 3)) {
+                if color == color_tour && self.get_color((from.0, from.1 + 1)) == None && self.get_color((from.0, from.1 + 2)) == None {
+                    available_move.push((MoveType::Roque, from.0, from.1 + 3));
+                }
+            }
         }
         available_move
     }
@@ -254,7 +287,58 @@ impl Chess {
         available_move
     }
     fn pion_available_move(&self, color: Color, from: (usize, usize)) -> Vec<(MoveType, usize, usize)> {
-        todo!()
+        let mut available_move = Vec::new();
+        // pion noir
+        if color == Color::Black {
+            if self.get_color((from.0 + 1, from.1)) == None {
+                available_move.push((MoveType::Normal, from.0 + 1, from.1));
+            }
+            if self.get_color((from.0 + 2, from.1)) == None {
+                available_move.push((MoveType::DoublePush, from.0 + 2, from.1));
+            }
+            if let Some(piece) = self.board[from.0 + 1][from.1 - 1] {
+                if piece == Piece::TemporaryPion(Color::White) {
+                    available_move.push((MoveType::EnPassant, from.0 + 1, from.1 - 1));
+                }
+                else if self.color_piece(piece) == Color::White {
+                    available_move.push((MoveType::Normal, from.0 + 1, from.1 - 1));
+                }
+            }
+            if let Some(piece) = self.board[from.0 + 1][from.1 + 1] {
+                if piece == Piece::TemporaryPion(Color::White) {
+                    available_move.push((MoveType::EnPassant, from.0 + 1, from.1 + 1));
+                }
+                else if self.color_piece(piece) == Color::White {
+                    available_move.push((MoveType::Normal, from.0 + 1, from.1 + 1));
+                }
+            }
+        }
+        // pion blanc
+        if color == Color::White {
+            if self.get_color((from.0 - 1, from.1)) == None {
+                available_move.push((MoveType::Normal, from.0 - 1, from.1))
+            }
+            if self.get_color((from.0 - 2, from.1)) == None {
+                available_move.push((MoveType::DoublePush, from.0 - 2, from.1));
+            }
+            if let Some(piece) = self.board[from.0 - 1][from.1 - 1] {
+                if piece == Piece::TemporaryPion(Color::Black) {
+                    available_move.push((MoveType::EnPassant, from.0 - 1, from.1 - 1));
+                }
+                else if self.color_piece(piece) == Color::Black {
+                    available_move.push((MoveType::Normal, from.0 - 1, from.1 - 1));
+                }
+            }
+            if let Some(piece) = self.board[from.0 - 1][from.1 + 1] {
+                if piece == Piece::TemporaryPion(Color::White) {
+                    available_move.push((MoveType::EnPassant, from.0 - 1, from.1 + 1));
+                }
+                else if self.color_piece(piece) == Color::Black {
+                    available_move.push((MoveType::Normal, from.0 - 1, from.1 + 1));
+                }
+            }
+        }
+        available_move
     }
 }
 
