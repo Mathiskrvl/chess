@@ -91,6 +91,9 @@ impl Chess {
         }
         None
     }
+    fn ask_which_piece(&self) -> Piece {
+        Piece::Queen(self.turn)
+    }
     fn action(&mut self, from: (usize, usize), to: (usize, usize)) {
         let (available_move, move_type) = self.available_move(from);
         assert_eq!(available_move.len(), move_type.len(), "Les vecteur available_move : {:?} et move_type: {:?} n'ont pas la même longeur", available_move, move_type);
@@ -121,7 +124,9 @@ impl Chess {
         todo!()
     }
     fn promotion_move(&mut self, from: (usize, usize), to: (usize, usize)) {
-        todo!()
+        let piece = self.ask_which_piece();
+        self.board[to.0][to.1] = Some(piece);
+        self.board[from.0][from.1] = None;
     }
     fn passant_move(&mut self, from: (usize, usize), to: (usize, usize)) {
         self.board[to.0][to.1] = None;
