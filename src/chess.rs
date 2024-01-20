@@ -388,8 +388,13 @@ impl Chess {
                     type_move.push(MoveType::EnPassant);
                 }
                 else if self.color_piece(piece) == Color::Black {
-                    available_move.push((from.0 + 1, from.1 - 1));
-                    type_move.push(MoveType::Normal);
+                    if from.0 + 1 == 7 {
+                        available_move.push((from.0 + 1, from.1 - 1));
+                        type_move.push(MoveType::Promotion);
+                    } else {
+                        available_move.push((from.0 + 1, from.1 - 1));
+                        type_move.push(MoveType::Normal);
+                    }
                 }
             }
             if let Some(piece) = self.board[from.0 + 1][from.1 + 1] {
@@ -398,8 +403,13 @@ impl Chess {
                     type_move.push(MoveType::EnPassant);
                 }
                 else if self.color_piece(piece) == Color::Black {
-                    available_move.push((from.0 + 1, from.1 + 1));
-                    type_move.push(MoveType::Normal);
+                    if from.0 + 1 == 7 {
+                        available_move.push((from.0 + 1, from.1 + 1));
+                        type_move.push(MoveType::Promotion);
+                    } else {
+                        available_move.push((from.0 + 1, from.1 + 1));
+                        type_move.push(MoveType::Normal);
+                    }
                 }
             }
         }
@@ -424,8 +434,13 @@ impl Chess {
                     type_move.push(MoveType::EnPassant);
                 }
                 else if self.color_piece(piece) == Color::White {
-                    available_move.push((from.0 - 1, from.1 - 1));
-                    type_move.push(MoveType::Normal);
+                    if from.0 - 1 == 0 {
+                        available_move.push((from.0 - 1, from.1 - 1));
+                        type_move.push(MoveType::Promotion);
+                    } else {
+                        available_move.push((from.0 - 1, from.1 - 1));
+                        type_move.push(MoveType::Normal);
+                    }
                 }
             }
             if let Some(piece) = self.board[from.0 - 1][from.1 + 1] {
@@ -434,8 +449,13 @@ impl Chess {
                     type_move.push(MoveType::EnPassant);
                 }
                 else if self.color_piece(piece) == Color::White {
-                    available_move.push((from.0 - 1, from.1 + 1));
-                    type_move.push(MoveType::Normal);
+                    if from.0 - 1 == 0 {
+                        available_move.push((from.0 - 1, from.1 + 1));
+                        type_move.push(MoveType::Promotion);
+                    } else {
+                        available_move.push((from.0 - 1, from.1 + 1));
+                        type_move.push(MoveType::Normal);
+                    }
                 }
             }
         }
