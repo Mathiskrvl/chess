@@ -2,7 +2,6 @@
 enum Color {
     White,
     Black,
-    // None
 }
 
 #[derive(Copy, Clone, PartialEq)]
@@ -92,7 +91,6 @@ impl Chess {
         }
         None
     }
-    // action en fonction des MoveType
     fn action(&mut self, from: (usize, usize), to: (usize, usize)) {
         let (available_move, move_type) = self.available_move(from);
         assert_eq!(available_move.len(), move_type.len(), "Les vecteur available_move : {:?} et move_type: {:?} n'ont pas la même longeur", available_move, move_type);
@@ -379,10 +377,10 @@ impl Chess {
                     available_move.push((from.0 + 1, from.1));
                     type_move.push(MoveType::Promotion);
                 }
-            }
-            if from.0 == 6 && self.get_color((from.0 + 2, from.1)) == None {
-                available_move.push((from.0 + 2, from.1));
-                type_move.push(MoveType::DoublePush);
+                if from.0 == 6 && self.get_color((from.0 + 2, from.1)) == None {
+                    available_move.push((from.0 + 2, from.1));
+                    type_move.push(MoveType::DoublePush);
+                }
             }
             if let Some(piece) = self.board[from.0 + 1][from.1 - 1] {
                 if piece == Piece::TemporaryPion(Color::Black, self.count_turn - 1) {
@@ -415,10 +413,10 @@ impl Chess {
                     available_move.push((from.0 - 1, from.1));
                     type_move.push(MoveType::Promotion);
                 }
-            }
-            if from.0 == 1 && self.get_color((from.0 - 2, from.1)) == None {
-                available_move.push((from.0 - 2, from.1));
-                type_move.push(MoveType::DoublePush);
+                if from.0 == 1 && self.get_color((from.0 - 2, from.1)) == None {
+                    available_move.push((from.0 - 2, from.1));
+                    type_move.push(MoveType::DoublePush);
+                }
             }
             if let Some(piece) = self.board[from.0 - 1][from.1 - 1] {
                 if piece == Piece::TemporaryPion(Color::White, self.count_turn - 1) {
