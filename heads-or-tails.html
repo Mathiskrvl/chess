@@ -60,9 +60,37 @@
       display: none; /* Masquer les boutons "Flip the coin" et "Restart" initialement */
     }
 
+    @keyframes rotate-3d-coin {
+        0% {
+          transform: rotateX(0deg);
+        }
+        100% {
+          transform: rotateX(720deg);
+        }
+      }
+      
+    .rotate-3d-coin {
+        animation: rotate-3d-coin 5s forwards;
+    }
+
+    #coin {
+        width: 100px;
+        height: 100px;
+        background-color: #FFD700; /* Couleur d'une pièce d'or */
+        border-radius: 50%; /* Forme circulaire */
+        margin: 20px auto; /* Centrer horizontalement */
+        display: none; /* Masquer la pièce initialement */
+        animation: rotate-3d-coin 5s forwards; /* Animation avec une durée */
+    }
+      
+    .coin:hover {
+      transform: rotate(180deg);
+    }
+
     #restart-button {
       margin-top: 20px; /* Espacement entre le résultat et le bouton Restart */
     }
+
   </style>
   <title>Heads or Tails</title>
 </head>
@@ -75,6 +103,7 @@
   <button id="flip-button" type="button" onclick="flipCoin()">Flip the coin</button>
   <button id="restart-button" type="button" onclick="restartGame()">Restart</button>
   <div id="result"></div>
+  <div id="coin" class="rotate-3d-coin"></div>
 </div>
 
 <script>
@@ -100,20 +129,35 @@
     const choices = ['heads', 'tails'];
     const randomIndex = Math.floor(Math.random() * 2);
     const result = choices[randomIndex];
-
+  
     // Afficher le résultat avec des sauts de ligne
-    document.getElementById('result').innerHTML += `The result is <span>${result}</span>.\n\n`;
-
-    // Vérifier si le joueur a gagné
-    if (userChoice === result) {
-      document.getElementById('result').innerHTML += 'Congratulations, you won!';
-    } else {
-      document.getElementById('result').innerHTML += 'Sorry, you lose.';
-    }
-
-    // Masquer le bouton "Flip the coin" après le lancer
+    /*document.getElementById('result').innerHTML += `The result is <span>${result}</span>.\n\n`;*/
+  
+    // Masquer le bouton "Flip the coin" avant le lancer
     document.getElementById('flip-button').style.display = 'none';
+  
+    // Afficher la pièce
+    const coinElement = document.getElementById('coin');
+    coinElement.style.display = 'block';
+    coinElement.classList.add('rotate-3d-coin'); // Ajouter la classe d'animation
+  
+    // Ajouter un délai avant d'afficher le résultat
+    setTimeout(() => {
+      // Vérifier si le joueur a gagné
+      if (userChoice === result) {
+        document.getElementById('result').innerHTML += 'Congratulations, you won!';
+      } else {
+        document.getElementById('result').innerHTML += 'Sorry, you lose.';
+      }
+  
+      // Masquer la pièce et réinitialiser pour le prochain lancer
+      coinElement.style.display = 'none';
+      coinElement.classList.remove('rotate-3d-coin'); // Retirer la classe d'animation
+      document.getElementById('flip-button').style.display = 'inline-block';
+    }, 5000); // Utiliser le même délai que la durée de l'animation
   }
+  
+  
 
   function restartGame() {
     // Réinitialiser les choix et afficher les boutons "Pile" et "Face"
@@ -129,6 +173,16 @@
     // Afficher le bouton "Flip the coin" une fois que l'utilisateur a fait son choix
     document.getElementById('flip-button').style.display = 'none';
   }
+
+  const coin = document.getElementById('coin');
+
+  function rotateCoin() {
+    let rotation = 0;
+    setInterval(() => {
+        rotation += 15;
+        coin.style.transform = `rotate(${rotation}deg)`;
+    }, 100);
+    }
 </script>
 
 </body>
