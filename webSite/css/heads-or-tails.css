@@ -1,0 +1,86 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #87b7ea; /* Couleur de fond apaisante */
+  }
+
+  #game-title {
+      font-size: 40px;
+      margin-bottom: 10px;
+      color: #333;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      letter-spacing: 2px;
+      font-weight: bold;
+    }
+
+  #coin-flip-container {
+    text-align: center;
+  }
+
+  #result {
+    font-size: 24px;
+    margin-top: 20px;
+    color: #333;
+    white-space: pre-line; /* Pour afficher les sauts de ligne */
+  }
+
+  #result span {
+    font-weight: bold;
+    font-size: 32px;
+  }
+
+  .choice-button, #flip-button, #restart-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #deb887; /* Couleur bois clair */
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .choice-button:hover, #flip-button:hover, #restart-button:hover {
+    background-color: #8B4513; /* Couleur brun foncé au survol */
+  }
+
+  #flip-button, #restart-button {
+    display: none; /* Masquer les boutons "Flip the coin" et "Restart" initialement */
+  }
+
+  @keyframes rotate-3d-coin {
+      0% {
+        transform: rotateX(0deg);
+      }
+      100% {
+        transform: rotateX(720deg);
+      }
+    }
+    
+  .rotate-3d-coin {
+      animation: rotate-3d-coin 5s forwards;
+  }
+
+  #coin {
+      width: 100px;
+      height: 100px;
+      background-color: #FFD700; /* Couleur d'une pièce d'or */
+      border-radius: 50%; /* Forme circulaire */
+      margin: 20px auto; /* Centrer horizontalement */
+      display: none; /* Masquer la pièce initialement */
+      animation: rotate-3d-coin 5s forwards; /* Animation avec une durée */
+  }
+    
+  .coin:hover {
+    transform: rotate(180deg);
+  }
+
+  #restart-button {
+    margin-top: 20px; /* Espacement entre le résultat et le bouton Restart */
+  }
