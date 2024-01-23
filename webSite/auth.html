@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/common.css">
+
+  <title>Authentification</title>
+</head>
+<body>
+  <div id="home-button-container">
+    <button id="home-button" onclick="goToHomePage()">Home</button>
+  </div>
+
+    <section>
+        <form>
+            <h1>Login</h1>
+            <div class="inputbox">
+                <ion-icon name="username-outline"></ion-icon>
+                <input type="text" required>
+                <label for="">UserName</label>
+            </div>
+            <div class="inputbox">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+                <input type="password" required>
+                <label for="">Password</label>
+            </div>
+            <div class="forget">
+                <label for=""><input type="checkbox">Remember Me</label>
+              <a href="#">Forget Password</a>
+            </div>
+            <button>Log in</button>
+            <div class="register">
+                <p>Don't have a account <a href="#">Register</a></p>
+            </div>
+        </form>
+    </section>
+
+
+  <script src="auth.js"></script>
+  <script src="common.js"></script>
+
+  <script>
+
+    function registerUser(username, password) {
+      // Vérifier si l'utilisateur existe déjà
+      const existingUsers = getUsersFromLocalStorage();
+      if (existingUsers.some(user => user.username === username)) {
+        alert('Username already exists. Please choose a different username.');
+        return false;
+      }
+    
+      // Ajouter le nouvel utilisateur
+      const newUser = { username, password };
+      existingUsers.push(newUser);
+      saveUsersToLocalStorage(existingUsers);
+      return true;
+    } 
+
+    function loginUser(username, password) {
+      // Récupérer tous les utilisateurs
+      const users = getUsersFromLocalStorage();
+    
+      // Vérifier les informations d'identification
+      const user = users.find(user => user.username === username && user.password === password);
+    
+      if (user) {
+        alert('Login successful!');
+        return true;
+      } else {
+        alert('Invalid username or password. Please try again.');
+        return false;
+      }
+    }
+
+    function saveUsersToLocalStorage(users) {
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+    
+    function getUsersFromLocalStorage() {
+      const usersString = localStorage.getItem('users');
+      return usersString ? JSON.parse(usersString) : null;
+    }
+    
+  </script>
+</body>
+</html>

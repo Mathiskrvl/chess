@@ -1,56 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/common.css">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #87b7ea; /* Couleur de fond apaisante */
-    }
 
-    #index-title {
-      font-size: 60px;
-      margin-bottom: 50px;
-      color: #333;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      letter-spacing: 2px;
-      font-weight: bold;
-    }
-
-    #home-container {
-      text-align: center;
-    }
-
-    #game-modes {
-      margin-bottom: 20px;
-    }
-
-    #game-modes button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: #deb887; /* Couleur bois clair */
-      color: #333;
-      border: none;
-      border-radius: 5px;
-      margin-right: 10px;
-      transition: background-color 0.3s ease-in-out;
-    }
-
-    #game-modes button:hover {
-      background-color: #8B4513; /* Couleur brun foncé au survol */
-    }
-  </style>
   <title>Tic Tac Toe</title>
 </head>
 <body>
+  <div>
+    <button id="login-button" onclick="redirectToAuth()">Login</button>
+  </div>
 
 <div id="home-container">
   <h1 id="index-title">Welcome to the Game Center</h1>
@@ -61,6 +23,7 @@
   </div>
 </div>
 
+<script src="common.js"></script>
 <script>
   function startGame(mode) {
     // Rediriger vers la page du jeu avec le mode sélectionné
