@@ -1,3 +1,18 @@
+pub fn add(left: usize, right: usize) -> usize {
+    left + right
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn it_works() {
+        let result = add(2, 2);
+        assert_eq!(result, 4);
+    }
+}
+
 mod chess;
 
 const number_possible_move: [[usize; 8]; 8] = [
@@ -10,13 +25,3 @@ const number_possible_move: [[usize; 8]; 8] = [
     [24,27,30,31,31,30,27,24],
     [23,24,25,25,25,25,24,23]
 ];
-fn main() {
-    println!("Hello, world!");
-    let mut s = 0;
-    for i in 0..8 {
-        for j in 0..8 {
-            s += number_possible_move[i][j];
-        }
-    }
-    println!("{s}");
-}
