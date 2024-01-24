@@ -1,0 +1,15 @@
+{
+  "name": "chess-web",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "wasm": "cargo build --lib --release --target wasm32-unknown-unknown --manifest-path ./chess-rust/Cargo.toml && wasm-bindgen --target web --no-typescript --out-dir ./my-wasm ./chess-rust/target/wasm32-unknown-unknown/release/my_crate.wasm",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.0.8"
+  }
+}
