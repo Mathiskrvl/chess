@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "wasm": "cargo build --lib --release --target wasm32-unknown-unknown --manifest-path ./chess-rust/Cargo.toml && wasm-bindgen --target web --no-typescript --out-dir ./my-wasm --out-name wasm-chess ./chess-rust/target/wasm32-unknown-unknown/release/chess-rust.wasm",
+    "host": "vite --host",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
