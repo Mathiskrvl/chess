@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="/common/common.css" rel="stylesheet">  
-  <link href="./heads-tails.css" rel="stylesheet">  
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,9 +10,7 @@
   <div>  
     <button id="home-button" onclick="goToHomePage()">Home</button>
     <button id="login-button" onclick="redirectToAuth()">Login</button>
-
 </div>
-
 <div id="coin-flip-container">
   <h1 id="game-title">Heads or Tails</h1>
   <button class="choice-button" type="button" onclick="chooseSide('heads')">Heads</button>
@@ -26,7 +21,7 @@
   <div id="coin" class="rotate-3d-coin"></div>
 </div>
 
-<script type="module" src="/common/common.js"></script>
+<script type="module" src="./heads-tails.js"></script>
 <script>
   let userChoice = '';
 
