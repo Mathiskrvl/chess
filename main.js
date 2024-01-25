@@ -1,5 +1,6 @@
 import '@/common.css'
 import '/style.css'
+import '@/common.js'
 
 window.startGame = (mode) => {
     console.log("testtttt")
