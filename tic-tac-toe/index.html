@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="css/common.css">
-  <link rel="stylesheet" href="css/tic-tac-toe.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -22,7 +20,9 @@
   <button id="restart-button" onclick="resetGame()">Restart</button>
 </div>
 
-<script src="common.js"></script>
+<script type="module" src="/common/common.js"></script>
+<script type="module" src="./tic-tac-toe.js"></script>
+
 <script>
   const board = document.getElementById('board');
   const cells = Array.from({ length: 9 });
