@@ -3,24 +3,22 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="/main.js"></script>
     <title>Tic Tac Toe</title>
   </head>
   <body>
-    <div id="app">
-      <div>
+      <header>
         <button id="login-button" onclick="redirectToAuth()">Login</button>
-      </div>
+      </header>
     
-      <div id="home-container">
-        <h1 id="index-title">Welcome to the Game Center</h1>
-        <div id="game-modes">
-          <button onclick="startGame('tic-tac-toe')">Tic-Tac-Toe</button>
-          <button onclick="startGame('heads-or-tails')">Heads or Tails</button>
-          <button onclick="startGame('chess')">Chess<br>(coming soon)<br></button>
-        </div>
+    <main id="home-container">
+      <h1 id="index-title">Welcome to the Game Center</h1>
+      <div id="game-modes">
+        <button id="tic-tac-toe">Tic-Tac-Toe</button>
+        <button id="heads-tails">Heads or Tails</button>
+        <button id="chess">Chess<br>(coming soon)<br></button>
       </div>
-    </div>
-    <script type="module" src="/main.js"></script>
+    </main>
   </body>
 </html>
 
