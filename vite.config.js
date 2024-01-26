@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import path from 'path'
 
 export default defineConfig({
-  base: '/chess/', // Laisser avec github actions
   resolve : {
     alias: {
         '@': path.resolve(__dirname, './common'),
