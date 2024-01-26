@@ -9,6 +9,7 @@ export default defineConfig({
     },
     build: {
         rollupOptions: {
+          base: '/chess/', // Laisser avec github actions
           input: {
             main: path.resolve(__dirname, "index.html"),
             chess: path.resolve(__dirname, "chess/index.html"),
