@@ -7,11 +7,11 @@
   <title>Heads or Tails</title>
 </head>
 <body>
-  <div>  
-    <button id="home-button" onclick="goToHomePage()">Home</button>
-    <button id="login-button" onclick="redirectToAuth()">Login</button>
-</div>
-<div id="coin-flip-container">
+  <header>  
+    <a id="home-button" onclick="goToHomePage()">Home</a>
+    <a id="login-button" onclick="redirectToAuth()">Login</a>
+  </header>
+<main id="coin-flip-container">
   <h1 id="game-title">Heads or Tails</h1>
   <button class="choice-button" type="button" onclick="chooseSide('heads')">Heads</button>
   <button class="choice-button" type="button" onclick="chooseSide('tails')">Tails</button>
@@ -19,7 +19,7 @@
   <button id="restart-button" type="button" onclick="restartGame()">Restart</button>
   <div id="result"></div>
   <div id="coin" class="rotate-3d-coin"></div>
-</div>
+</main>
 
 <script type="module" src="./heads-tails.js"></script>
 <script>

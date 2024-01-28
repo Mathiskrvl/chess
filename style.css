@@ -26,7 +26,7 @@ body {
     margin-bottom: 20px;
   }
 
-  #game-modes button {
+  #game-modes a {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
@@ -38,6 +38,6 @@ body {
     transition: background-color 0.3s ease-in-out;
   }
 
-  #game-modes button:hover {
+  #game-modes a:hover {
     background-color: #8B4513; /* Couleur brun foncé au survol */
   }

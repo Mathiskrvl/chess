@@ -1,89 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="/chess-icon.svg"/>
-  <title>Tic Tac Toe</title>
-</head>
-<body>
-  <div>  
-    <button id="home-button" onclick="goToHomePage()">Home</button>
-    <button id="login-button" onclick="redirectToAuth()">Login</button>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/chess-icon.svg"/>
+    <script type="module" src="./tic-tac-toe.js"></script>
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <header>  
+      <a id="home-button">Home</a>
+      <a id="login-button">Login</a>
+    </header>
 
-</div>
-
-<div id="game-container">
-  <div id="game-title">Tic Tac Toe</div>
-  <div id="board"></div>
-  <div id="player-turn">Player's turn: <span id="current-player">X</span></div>
-  <button id="restart-button" onclick="resetGame()">Restart</button>
-</div>
-
-<script type="module" src="./tic-tac-toe.js"></script>
-
-<script>
-  const board = document.getElementById('board');
-  const cells = Array.from({ length: 9 });
-  const playerTurnDisplay = document.getElementById('current-player');
-
-  let currentPlayer = 'X';
-  let gameBoard = ['', '', '', '', '', '', '', '', ''];
-  let gameActive = true;
-
-  function renderBoard() {
-    board.innerHTML = '';
-    gameBoard.forEach((value, index) => {
-      const cell = document.createElement('div');
-      cell.classList.add('cell');
-      cell.textContent = value;
-      cell.addEventListener('click', () => cellClick(index));
-      board.appendChild(cell);
-      cells[index] = cell;
-    });
-
-    playerTurnDisplay.textContent = currentPlayer;
-  }
-
-  function cellClick(index) {
-    if (!gameActive || gameBoard[index] !== '') return;
-
-    gameBoard[index] = currentPlayer;
-    cells[index].textContent = currentPlayer;
-
-    if (checkWinner()) {
-      alert(`Player ${currentPlayer} wins!`);
-      resetGame();
-    } else if (gameBoard.every(cell => cell !== '')) {
-      alert('It\'s a draw!');
-      resetGame();
-    } else {
-      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-      playerTurnDisplay.textContent = currentPlayer;
-    }
-  }
-
-  function checkWinner() {
-    const winPatterns = [
-      [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
-      [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
-      [0, 4, 8], [2, 4, 6] // diagonals
-    ];
-
-    return winPatterns.some(pattern =>
-      pattern.every(index => gameBoard[index] === currentPlayer)
-    );
-  }
-
-  function resetGame() {
-    gameBoard = ['', '', '', '', '', '', '', '', ''];
-    currentPlayer = 'X';
-    gameActive = true;
-    renderBoard();
-  }
-
-  renderBoard();
-</script>
-
-</body>
+    <main id="game-container">
+      <h1 id="game-title">Tic Tac Toe</h1>
+      <ol id="board"></ol>
+      <p id="player-turn">Player's turn: <span id="current-player">X</span></p>
+      <button id="restart-button">Restart</button>
+    </main>
+  </body>
 </html>
