@@ -8,13 +8,11 @@ body {
     margin: 0;
     background-color: #87b7ea; /* Couleur de fond apaisante */
   }
-
-  #chess-container {
+#chess-container {
     display: grid;
     grid-template-columns: repeat(8, 60px); /* Taille ajustée */
-  }
-
-  #game-title {
+}
+#game-title {
     font-size: 40px;
     margin-bottom: 10px;
     color: #333;
@@ -22,9 +20,8 @@ body {
     letter-spacing: 2px;
     font-weight: bold;
     text-align: center;
-  }
-
-  .square {
+}
+.square {
     width: 60px;
     height: 60px;
     display: flex;
@@ -32,23 +29,21 @@ body {
     justify-content: center;
     font-size: 14px;
     border: 1px solid #8B4513;
-  }
-
-  .white {
+}
+.white {
     background-color: #fff;
     border:1px solid #fff;
-  }
-
-  .black {
+}
+.black {
     background-color: #8B4513;
     border:1px solid #8B4513;
-  }
+}
 
-  #color-selector {
+#color-selector {
     margin-top: 20px;
-  }
+}
 
-  .choice-button {
+.choice-button {
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
@@ -59,7 +54,7 @@ body {
       margin-right: 10px;
       margin-bottom: 10px;
       transition: background-color 0.3s ease-in-out;
-    }
+}
 
   .choice-button:hover {
       background-color: #8B4513; /* Couleur brun foncé au survol */

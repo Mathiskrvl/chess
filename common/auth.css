@@ -6,14 +6,18 @@
 }
 .center button {
     padding: 10px 20px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
-    color: #222;
-    background: #f5f5f5;
+    color: #333;
+    background:#deb887;
     border:none;
     outline: none;
     cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+.center button:hover {
+    background: #8B4513;
 }
 .popup {
     position: absolute;

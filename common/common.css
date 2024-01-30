@@ -1,42 +1,12 @@
-/*Here are the common styles for the severals games*/
 #home-button-container {
   position: absolute;
   top: 10px;
   left: 10px;
 }
-
 #home-button {
     position: absolute;
     top: 10px;
     left: 10px;
     padding: 10px;
-    font-size: 16px;
     cursor: pointer;
-    background-color: #deb887; /* Couleur bois clair */
-    color: #333;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  #home-button:hover {
-    background-color: #8B4513; /* Couleur brun foncé au survol */
-  }
-
-  #login-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #deb887; /* Couleur bois clair */
-    color: #333;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  #login-button:hover {
-    background-color: #8B4513; /* Couleur brun foncé au survol */
-  }
+}
