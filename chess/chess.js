@@ -1,8 +1,6 @@
 import './chess.css'
 import '@/common.css'
 import '@/auth.js'
-import {goToHomePage} from '@/common.js'
-document.getElementById('home-button').addEventListener('click', () => goToHomePage())
 
 const chessContainer = document.getElementById('chess-container');
 const colorSelector = document.getElementById('color');

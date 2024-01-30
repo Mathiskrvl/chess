@@ -1,8 +1,6 @@
 import '@/common.css'
 import './tic-tac-toe.css'
 import '@/auth.js'
-import {goToHomePage} from '@/common.js'
-document.getElementById('home-button').addEventListener('click', () => goToHomePage())
 
 const board = document.getElementById('board');
 const cells = Array.from({ length: 9 });
