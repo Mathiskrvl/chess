@@ -1,61 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="/chess-icon.svg"/>
-  <title>Chess Board</title>
-</head>
-<body>
-  <div>  
-    <button id="home-button" onclick="goToHomePage()">Home</button>
-    <div id="login"></div>
-</div>
-<div id="color-selector">
-    <h1 id="game-title">Chess</h1>
-    <button class="choice-button" onclick="chooseColor('white')">White</button>
-    <button class="choice-button" onclick="chooseColor('black')">Black</button>
-</div>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/chess-icon.svg"/>
+    <script type="module" src="./chess.js"></script>
+    <title>Chess Board</title>
+  </head>
+  <body>
+    <div>  
+      <button id="home-button">Home</button>
+      <div id="login"></div>
+    </div>
+    <div id="color-selector">
+        <h1 id="game-title">Chess</h1>
+        <button id="choice-button-white" class="choice-button">White</button>
+        <button id="choice-button-black" class="choice-button">Black</button>
+    </div>
+    <div id="chess-container"></div>
 
-<div id="chess-container"></div>
-
-<button id="start-button" onclick="startGame()">Start Game</button>
-
-<!-- <script type="module" src="/common/common.js"></script> -->
-<script type="module" src="./chess.js"></script>
-<script>
-  const chessContainer = document.getElementById('chess-container');
-  const colorSelector = document.getElementById('color');
-  const startButton = document.getElementById('start-button');
-
-  const createChessboard = () => {
-    const board = [];
-    const colors = ['white', 'black'];
-
-    for (let row = 0; row < 8; row++) {
-      for (let col = 0; col < 8; col++) {
-        const square = document.createElement('div');
-        square.classList.add('square', colors[(row + col) % 2]);
-        board.push(square);
-        chessContainer.appendChild(square);
-      }
-    }
-
-    return board;
-  };
-
-  let chessboard = createChessboard();
-
-  const startGame = () => {
-    const chosenColor = colorSelector.value;
-    chessboard.forEach(square => {
-      if (square.classList.contains(chosenColor)) {
-        square.textContent = 'Your Piece';
-      }
-    });
-    startButton.disabled = true;
-  };
-</script>
-
-</body>
+    <button id="start-button">Start Game</button>
+    </body>
 </html>
