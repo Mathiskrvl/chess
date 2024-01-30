@@ -1,4 +1,5 @@
 import './chess.css'
 import '@/common.css'
-import '@/common.js'
 import '@/auth.js'
+import {goToHomePage} from '@/common.js'
+document.getElementById('home-button').addEventListener('click', () => goToHomePage())

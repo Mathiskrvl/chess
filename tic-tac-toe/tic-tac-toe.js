@@ -1,7 +1,8 @@
 import '@/common.css'
 import './tic-tac-toe.css'
 import '@/auth.js'
-import {redirectToAuth, goToHomePage} from '@/common.js'
+import {goToHomePage} from '@/common.js'
+document.getElementById('home-button').addEventListener('click', () => goToHomePage())
 
 const board = document.getElementById('board');
 const cells = Array.from({ length: 9 });
@@ -63,6 +64,4 @@ function resetGame() {
 }
 
 document.getElementById('restart-button').addEventListener('click', () => resetGame())
-document.getElementById('home-button').addEventListener('click', () => goToHomePage())
-document.getElementById('login-button').addEventListener('click', () => redirectToAuth())
 renderBoard();
