@@ -1,5 +1,6 @@
 import '@/common.css'
 import './tic-tac-toe.css'
+import '@/auth.js'
 import {redirectToAuth, goToHomePage} from '@/common.js'
 
 const board = document.getElementById('board');

@@ -1,6 +1,7 @@
 import '@/common.css'
 import '/style.css'
 import '@/common.js'
+import '@/auth.js'
 
 let games = ['tic-tac-toe', 'heads-tails', 'chess'];
 
