@@ -1,17 +1,6 @@
-body {
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #87b7ea; /* Couleur de fond apaisante */
-  }
-
-  #game-container {
+#game-container {
     text-align: center;
-  }
+}
 
   #board {
     display: grid;

@@ -1,22 +1,11 @@
-body {
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #87b7ea; /* Couleur de fond apaisante */
-  }
-
-  #index-title {
+#index-title {
     font-size: 60px;
     margin-bottom: 50px;
     color: #333;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     letter-spacing: 2px;
     font-weight: bold;
-  }
+}
 
   #home-container {
     text-align: center;

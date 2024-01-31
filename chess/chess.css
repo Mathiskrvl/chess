@@ -1,13 +1,3 @@
-body {
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #87b7ea; /* Couleur de fond apaisante */
-  }
 #chess-container {
     display: grid;
     grid-template-columns: repeat(8, 60px); /* Taille ajustée */

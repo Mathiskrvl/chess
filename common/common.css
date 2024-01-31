@@ -1,3 +1,15 @@
+body {
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-image: url('/test.svg');
+  background-size: cover; /* Couvre tout l'espace disponible */
+  background-position: center; /* Centre l'image */
+}
 #home-button-container {
   position: absolute;
   top: 10px;
